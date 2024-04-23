@@ -1,6 +1,6 @@
 # 编程小实验
 
-<figure><img src=".gitbook/assets/图片-20240422210643-3ctw5t7.jpg" alt="" width="300"><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/图片-20240422210643-3ctw5t7.jpg" alt="" width="450"><figcaption></figcaption></figure>
 
 ### 1、本教程致力于精简，一小节一个新概念
 
