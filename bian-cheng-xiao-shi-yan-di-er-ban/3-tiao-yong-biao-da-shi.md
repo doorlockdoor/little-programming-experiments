@@ -26,9 +26,9 @@ print(min(10, 20))
 # 等价于: print(10)，即min(10, 20) -> 10
 ```
 
-“代换”的过程就是计算机执行【计算】的过程，函数即是对过程的抽象。
+不严谨的说，“代换”的过程就是计算机执行“计算”的过程，函数即是对过程的抽象。
 
-这些python官方内置的函数，除此之外还有很多（[Python 3 文档](https://docs.python.org/zh-cn/3/library/functions.html)），例如abc(x)取x的绝对值，pow(x, n)计算x的n次幂等等。我们后续也可以书写自己的函数并使用，不过本小节暂时只用官方的函数。
+这些python官方内置的函数除此之外还有很多（[Python 3 文档](https://docs.python.org/zh-cn/3/library/functions.html)），例如abc(x)取x的绝对值，pow(x, n)计算x的n次幂等等。我们后续也可以书写自己的函数并使用，不过本小节暂时只用官方的函数。
 
 调用表达式的语法书写规则为：
 
