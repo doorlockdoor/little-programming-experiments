@@ -2,6 +2,8 @@
 
 <figure><img src=".gitbook/assets/图片-20240422210643-3ctw5t7.jpg" alt="" width="450"><figcaption></figcaption></figure>
 
+> Gitbook链接：[https://mr-zhenkongs-organization.gitbook.io/little-programming-experiments](https://mr-zhenkongs-organization.gitbook.io/little-programming-experiments)
+
 ### 1、尽量简单
 
 编程入门是一件非常麻烦的事情，所以我们就弄得尽量简单一些。
