@@ -93,10 +93,8 @@ class Vector3:
         self.y = y
         self.z = z
         
-    def append(self, vector):
-        self.x += vector.x
-        self.y += vector.y
-        self.z += vector.z
+    def add(v1, v2):
+        return Vector3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z)
 
 class Character:
     name: str
@@ -110,7 +108,7 @@ class Character:
     
     # 移动功能，在当前坐标上相加向量
     def walk(self, move_vector):
-        self.position.append(move_vector)
+        self.position = Vector3.add(self.position, move_vector)
 
 # 创建角色
 character = Character(
@@ -184,14 +182,14 @@ class Vector3:
 
 # 骨骼
 class Bone:
-    index: int
+    part: str
     position: Vector3
     rotation: Vector3
     
     # 根据数据适配骨骼节点
     def apply(self, data):
-        position = data[self.index][0]
-        rotation = data[self.index][1]
+        position = data.get(self.part).position
+        rotation = data.get(self.part).rotation
 
 # 角色
 class Character:
@@ -208,7 +206,7 @@ class Character:
     
     # 移动功能，自动播放动画
     def walk(self, move_vector):
-        self.position.append(move_vector)
+        self.position = Vector3.add(self.position, move_vector)
         animation = animation_system.find("move")
         animation.play(self.bones)
         
@@ -236,21 +234,27 @@ class CharacterSystem:
 # 动画文件
 class Animation:
     name: str
-    time: float
+    total_frame: float
+    current_frame: float
     offset_data: list
     
     # 根据动画帧数据和目标骨骼，偏移变换节点
     def play(self, bones):
-        for data in offset_data:
-            for bone in bones:
-                bone.apply(data)
-        current_time += 1
-        if current_time > time:
-            current_time = 0
+        data = offset_data.get(current_frame)
+        for bone in bones:
+            bone.apply(data)
+        current_frame += 1
+        if current_frame > total_frame:
+            current_frame = 0
 
 # 动画系统
 class AnimationSystem:
     animation: list
+    
+    # 加载动画文件
+    def load(self):
+        files = util.read("game/animation").suffix(".anim")
+        animation = files.to_list(typeof(Animation))
     
     # 寻找对应名称的动画文件
     def find(self, name):
@@ -279,9 +283,9 @@ class Vector3:
     z: float
     
     def __init__(self, x, y, z): ...
-    def append(self, vector): ...
-    def dot(self, vector): ...
-    def mul(self, vector): ...
+    def add(v1, v2): ...
+    def dot(v1, v2): ...
+    def mul(v1, v2): ...
     def normalize(self): ...
     def zero(): ...
     def one(): ...
@@ -306,12 +310,13 @@ class Animation:
     def play(self, bones): ...
 
 class AnimationSystem:
+    def load(self): ..
     def find(self, name): ...
 ```
 
 这就是通俗意义上的接口，也就是api的思想（Application Programming Interface），一种程序对接的约定。
 
-它们构成了功能的基石，例如向量，后续无论是角色移动、旋转，还是播放动画（动画骨骼的移动和旋转），还是UI的弹窗、镜头的晃动、下落的雨雪等等，其底层都是已经封装好了的功能。（当然，实际使用中我们会用别人写好的第三方库，它们更全面，但底层思想是一致的）
+它们构成了功能的基石，例如向量，后续无论是角色移动、旋转，还是播放动画（动画骨骼的移动和旋转），还是UI的弹窗、镜头的晃动、下落的雨雪等等，其底层都是已经封装好了的功能。（当然，实际使用中我们会用别人写好的库，它们更全面，但底层思想是一致的）
 
 衍生开来，其实在访问操作系统的时候也是如此，在控制台输出信息，借用的就是操作系统提供的接口。这些接口就是一系列的函数，例如刷新窗口、传输字符等等。但我们不需要关心，因为python官方已经把它们封装为了一个简单的函数，print。
 
