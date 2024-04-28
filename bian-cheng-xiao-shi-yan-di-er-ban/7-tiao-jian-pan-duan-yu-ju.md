@@ -82,6 +82,18 @@ else:
     print("判断为假")
 ```
 
+> 备注：python的elif写法不是很常见，更常见的写法是else if：
+>
+> `if x == 1: ......`
+>
+> `else if x == 2: ......`
+>
+> `else if x == 3: ......`
+>
+> `else: ......`
+>
+> python的elif就是else if的简写。
+
 除此之外还有逻辑运算符：
 
 * and，并且
